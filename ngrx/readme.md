@@ -248,6 +248,23 @@ this
 
 We will dwell into featureSelector word later.
 
+
+## Example 4
+
+Route block with guard using ngrx state
+```js
+canActivate(route: ActivateRouteSnapshot, state: RouterStateSnapshot): Observable<boolean> {
+    return this.store
+        .pipe(
+            select(isLoggedIn),
+            tap(loggedIn => {
+                if(!loggedIn) {
+                    this.router.navigateByUrl('/login');
+                }
+            })
+        )
+}
+```
 # Effects
 
 1. We dispatch an **action** from our code, which triggers a **effect**.
@@ -323,7 +340,7 @@ export class UserEffects {
                 localStorage.setItem('user', JSON.stringify(action.user));
             })
         )
-    );
+    , {dispatch: false});
 }
 ```
 
