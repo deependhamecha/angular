@@ -111,6 +111,8 @@ import * as UserActions from './user.action';
 export { UserActions };
 ```
 
+You can create separate actions file beside components and use index.ts in modules like this to re-export and use across module.
+
 
 # Add State to StoreModule
 ```js
