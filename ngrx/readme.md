@@ -397,7 +397,10 @@ StoreModule.forRoot({
       user: userReducer
     }, {}),
 ```
-What if we want independent(clean) Root State and Dynamic state which is not hard coded. For this we use Feature State.
+What if we want independent(clean) Root State and Dynamic state which is not hard coded. For this we use Feature State and keep root state empty object
+```js
+StoreModule.forRoot({}, {});
+```
 
 
 **app.module.ts**
