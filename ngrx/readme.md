@@ -265,6 +265,28 @@ canActivate(route: ActivateRouteSnapshot, state: RouterStateSnapshot): Observabl
         )
 }
 ```
+
+## Example 5
+
+Use multiple selectors to create new selector.
+
+```js
+const allItems = (state: AppState) => state.clothingItems;
+
+const shoppingCart = (state: AppState) => state.shoppingCart;
+
+const cartIds = createSelector(shoppingCart, cart => cart.map(item => item.id));
+
+const clothingItems = createSelector(
+  allItems,
+  cartIds,
+  (items, cart) => items.map(item => ({
+    ...item,
+    isInShoppingCart: cart.includes(item.id),
+  }),
+);
+```
+
 # Effects
 
 1. We dispatch an **action** from our code, which triggers a **effect**.
