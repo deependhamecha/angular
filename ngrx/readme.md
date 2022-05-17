@@ -462,8 +462,6 @@ export const userReducer = createReducer(
 );
 ```
 
-# Feature Selectors
-
 # Meta Reducers
 
 # Entity
