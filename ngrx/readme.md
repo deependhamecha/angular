@@ -628,6 +628,15 @@ const filteredClothings = createSelector(
 Instead use
 ```js
 const activeUsers = (state: AppState) => state.users.filter(user => user.isActive)
+activeUsers$ = this.store.select(activeUsers);
+```
+
+Or use new `createSelector`
+```js
+const activeUsers$ = createSelector(
+    state => state.users,
+    (users) => users.filter(user => user.isActive)
+);
 ```
 
 3. Don't use combineLatest. Use named selectors instead. Check **Example 5** of selectors.
