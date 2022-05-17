@@ -465,11 +465,67 @@ export const userReducer = createReducer(
 
 # Entity
 
+# Component Store
 
+Component Store is nothing but a service with Observables.
+**Pros:**
+1. You can share data(state) between parent and child(nested).
+2. Replace `@Input` and `@Output` with component-store so that parent and child can share state.
 
+**Cons:**
+1. The main problem with component store is it doesn't have actions, which means you cannot debug the redux devtools.
+2. Suppose there are multiple instances of a component. Consider, you are using **ngFor** on a component, then multiple service instances would be created. Else you use ComponentStore
+3. Cannot be used with `router-outlet`. Only Parent-Child.
 
+There are two ways you can use component store:
+1. Create a subclass of Component Store.
 
+```js
+export interface Movie {
+  name: string;
+  rating: number;
+}
 
+export interface MoviesState {
+  movies: Movie[];
+}
+
+@Injectable()
+export class MoviesStore extends ComponentStore<MoviesState> {
+
+  constructor() {
+    super({movies: []});
+  }
+
+}
+```
+
+```js
+export class FirstComponent implements ngOninit {
+  
+  constructor(private movieStore: MovieStore) {
+  }
+  
+  ngOnInit(): void {
+    this.movieStore.patchState({movies: [{name: 'Avengers', rating: 9}]});
+  }
+}
+```
+Remember, here you can add *selectors* in the service file.
+
+2. Inject ComponentStore directly in the component.
+```js
+export class FirstComponent implements ngOninit {
+  
+  constructor(private componentStore: ComponentStore<MovieState>) {
+  }
+  
+  ngOnInit(): void {
+    this.componentStore.setState({movies: [{name: 'Avengers', rating: 9}]});
+  }
+}
+```
+You have to add selectors in component as there is no service file.
 
 
 
