@@ -486,6 +486,7 @@ export const userReducer = createReducer(
 # Component Store
 
 Component Store is nothing but a service with Observables.
+
 **Pros:**
 1. You can share data(state) between parent and child(nested).
 2. Replace `@Input` and `@Output` with component-store so that parent and child can share state.
