@@ -1,11 +1,24 @@
-What NGRX fixes?
+Topics:
+1. [What NgRx fixes?](#what-ngrx-fixes)
+2. NgRx Store
+3. NgRx Actions, Reducers
+4. NgRx Selectors
+5. NgRx Effects
+6. NgRx Component Store
+7. NgRx Router Store
+8. NgRx Entity
+9. NgRx Data
+10. NgRx Schematics
+
+
+# What NGRX fixes?
 1. Hitting Unncessary API on page load.
 2. Common Store of variables where variables are not tied to components by which page renders variables much faster.
 3. Syncing data with backend
 4. Avoid Loading of data which is already present by having in-memory database(not exactly).
 
 
-# NGRX Store
+# NgRx Store
 
 Start by installing ngrx store, this will install and add to package.json and modify `app.module.ts`.
 
@@ -30,7 +43,7 @@ ng add @ngrx/store-devtools
 1. We dispatch an **action** from our code, which triggers a **reducer** which changes the state in the **store**.
 2. We dispatch an **action** from our code, which triggers a **effect**.
 3. We dispatch an **action** from our code, which triggers a **reducer** which changes the state in the **store** which triggers an **effect**.
-
+X
 # Create a Model
 ```js
 export interface User {
