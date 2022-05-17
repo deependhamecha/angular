@@ -167,6 +167,20 @@ export interface AppState {
 }
 ```
 
+# Multiple action on same reducer
+```js
+on(increment, decrement, (state, action) => {
+
+    // State is before mutation value
+    // Action has after mutation value
+    console.log("In firstReducer", state, action);
+
+    return {
+        ...state,
+        num: action.num
+    };
+}),
+```
 # Selectors
 
 Selectors are projector functions to look into specific data into state. 
