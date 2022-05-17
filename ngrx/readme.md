@@ -22,7 +22,7 @@ First argument is the object, which you can see in devtools state. Kind of root 
 
 Remember: You wont be able see anything in **Redux Devtools**. For this, you need to add StoreDevTools
 ```sh
-  ng add @ngrx/store-devtools
+ng add @ngrx/store-devtools
 ```
 
 # Concept
@@ -465,6 +465,10 @@ export const userReducer = createReducer(
 # Meta Reducers
 
 # Entity
+
+# Data
+
+# Router Store
 
 # Component Store
 
