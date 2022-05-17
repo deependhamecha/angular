@@ -1,10 +1,10 @@
 Topics:
 1. [What NgRx fixes?](#what-ngrx-fixes)
 2. [NgRx Store](#NgRx-Store)
-3. NgRx Actions, Reducers
-4. NgRx Selectors
-5. NgRx Effects
-6. NgRx Component Store
+3. [Concept: NgRx Actions, Reducers, dispatch an action](#concept)
+4. [NgRx Selectors](#selectors)
+5. [NgRx Effects](#effects)
+6. [NgRx Component Store](#component-store)
 7. NgRx Router Store
 8. NgRx Entity
 9. NgRx Data
@@ -18,7 +18,7 @@ Topics:
 4. Avoid Loading of data which is already present by having in-memory database(not exactly).
 
 
-# NgRx Store
+# Store
 
 Start by installing ngrx store, this will install and add to package.json and modify `app.module.ts`.
 
