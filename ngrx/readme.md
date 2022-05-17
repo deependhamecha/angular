@@ -1,6 +1,6 @@
 Topics:
 1. [What NgRx fixes?](#what-ngrx-fixes)
-2. NgRx Store
+2. [NgRx Store](#NgRx-Store)
 3. NgRx Actions, Reducers
 4. NgRx Selectors
 5. NgRx Effects
