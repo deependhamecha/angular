@@ -515,3 +515,45 @@ StoreModule.forFeature('auth', fromAuth.reducers, { metaReducers: fromAuth.metaR
 Check Redux Devtools in chrome > State
 
 
+## What not to do in NgRx
+
+1. Never keep derived state inside the store
+```js
+// reducer.ts
+
+const _reducer = createReducer(
+  initialState,
+  on(clothingActions.filter, (state, {payload}) => ({
+    ...state,
+    query: payload,
+  })),
+);
+
+// selectors.ts
+
+const allClothings = (state: AppState) => state.clothings;
+
+const query = (state: AppState) => state.query;
+
+const filteredClothings = createSelector(
+  allClothings,
+  query,
+  (clothings, query) => clothing.filter(
+    clothing => clothing.name.includes(query),
+  ),
+);
+```
+
+2. Don't pipe the Observable selected from the store
+```js
+  activeUsers$ = this.store.select(state => state.users).pipe(
+    map(users => users.filter(user => user.isActive)),
+  );
+```
+Instead use
+```js
+const activeUsers = (state: AppState) => state.users.filter(user => user.isActive)
+```
+
+3. Don't use combineLatest. Use named selectors instead. Check **Example 5** of selectors.
+
