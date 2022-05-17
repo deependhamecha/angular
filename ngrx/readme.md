@@ -1,4 +1,4 @@
-Topics:
+# Topics:
 1. [What NgRx fixes?](#what-ngrx-fixes)
 2. [NgRx Store](#NgRx-Store)
 3. [Concept: NgRx Actions, Reducers, dispatch an action](#concept)
