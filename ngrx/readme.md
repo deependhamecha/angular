@@ -5,10 +5,11 @@
 4. [NgRx Selectors](#selectors)
 5. [NgRx Effects](#effects)
 6. [NgRx Component Store](#component-store)
-7. NgRx Router Store
-8. NgRx Entity
-9. NgRx Data
-10. NgRx Schematics
+7. [NgRx Router Store](#router-store)
+8. [Feature](#Feature)
+9. NgRx Entity
+10. NgRx Data
+11. NgRx Schematics
 
 
 # What NGRX fixes?
