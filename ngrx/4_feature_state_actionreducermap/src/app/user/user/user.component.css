@@ -1,0 +1,11 @@
+.wrapper {
+    display: flex;
+}
+
+.first-section {
+    flex: 1;
+}
+
+.second-section {
+    flex: 1;
+}
