@@ -44,65 +44,83 @@ ng add @ngrx/store-devtools
 1. We dispatch an **action** from our code, which triggers a **reducer** which changes the state in the **store**.
 2. We dispatch an **action** from our code, which triggers a **effect**.
 3. We dispatch an **action** from our code, which triggers a **reducer** which changes the state in the **store** which triggers an **effect**.
-X
-# Create a Model
+
+### Simple steps:
+
+Check example: *1_simple_root_state*
+
+1. Create a file, specify an action app.action.ts. An action is nothing but a string.
 ```js
-export interface User {
-    id: number;
-    name: string;
-    email: string;
-    password: string;
-    mobileNumber: string;
-}
-```
-
-# Create an Action
-
-**user.action.ts**
-```js
-import { createAction, props } from "@ngrx/store";
-import { User } from "src/app/model/all.model";
-
 export const createUser = createAction(
-    "[Create User from AppComponent] Create User",
-    props<{user: User}>()
-);
+“[ComponentName] Create User”
+)
 ```
+2. Create a file, specify a reducer app.reducer.ts. A reducer is where you will write your modification.
 
-# Create a Reducer
-**user.reducer.ts**
 ```js
-import { createReducer, on } from "@ngrx/store";
-import { UserActions } from ".";
-import { User } from "../../model/all.model";
+// Your State Type, why it is empty because we have specified empty object in app.module.ts in StoreModule.
+export interface AppState {}
 
-
-// State
-export interface UserState {
-    user: User | null;
+export interface User {
+	name: string;
 }
 
+export const initialState: AppState = {}
 
-// Initial State
-export const initialUserState: UserState = {
-    user: null
-};
-
-
-// Reducer
-export const userReducer = createReducer(
-    initialUserState,
-    on(
-        UserActions.createUser,
-        (state, action) => {
-            return {
-                user: action.user
-            };
-        }
-    )
+export const appReducer = createReducer(
+	initialState,
+	on(createUser, (state) => {
+		return {name: ‘Deepen’};
+	})
 );
 ```
 
+3. Dispatch An action
+```js
+export class AppComponent implements Oninit {
+
+	constructor(private store: Store<AppState>) {}
+
+	ngOninit() {
+		this.store.dispatch(createUser);
+	}
+}
+```
+4. For this to work you need give StoreModule, the name of the reducer
+```js
+StoreModule.forRoot({‘app’: appReducer}, {})
+```
+
+If you want to pass data to it, then specify using props,
+Check Example: *2_with_props*
+
+```js
+export const changeName = createAction(
+    “[ComponentName] Create User”,
+    props<{payload: User}>()
+)
+export const initialState: AppState = {}
+
+export const appReducer = createReducer(
+    initialState,
+    on(changeName, (state, action) => {
+        return action.payload;
+    })
+);
+```
+
+`state` shows value before value has been changed and `action` has data attached to it. Action has two things type and data(type is specified using parameterized props, in this case its `{payload: User}`.
+
+Now, lets dispatch the action with data,
+```js
+this.store.dispatch(createUser({name: ‘Deepen’});
+    ​ Listing to store
+constructor(private store: Store<AppState>) {
+    this.store.subscribe(e => {
+        console.log(e);
+    });
+}
+```
 # Typings file for actions
 
 **app/store/user/index.ts**
@@ -113,33 +131,6 @@ export { UserActions };
 ```
 
 You can create separate actions file beside components and use index.ts in modules like this to re-export and use across module.
-
-
-# Add State to StoreModule
-```js
-StoreModule.forRoot({
-      user: userReducer
-}, {}),
-```
-
-# Dispatch an Action
-```js
-constructor(private store: Store<UserState>) {
-    
-    let user = {
-        id: 1,
-        name: 'Dude',
-        email: 'dude@gmail.com',
-        password: 'abcd1234',
-        mobileNumber: '7878787878',
-    };
-    
-    // Calling an action
-    // Dispatch an action with data
-    this.store.dispatch(UserActions.createUser({user: user}));
-}
-
-```
 
 # Listing to Store
 ```js
@@ -158,17 +149,33 @@ this.store.pipe(
     console.log("UserState", e);
 });
 ```
+# Feature State
+Check Example: *3_feature_state*
+How to keep root state empty and create feature keys. *4_feature_state_actionreducermap* also focuses on using `ActionReducerMap`.
 
-# Root State (AppState)
+Consider, you have empty Root object
 ```js
-import { UserState } from "../user/user.reducer";
+StoreModule.forRoot({}, {});
+```
 
-export interface AppState {
-    user: UserState
+Now, your feature module will have something like this,
+```js
+StoreModule.forFeature('user', reducers);
+```
+
+Now, your state will be,
+```js
+{
+    user: {}
 }
 ```
 
+Suppose you want to add predefined keys under your feature key(you can also do it for root key), then you can put it in ActionReducerMap object along with its reducers and then specify it in `StoreModule.forFeature`.
+
+Check Example: *4_feature_state_actionreducermap*
+
 # Multiple action on same reducer
+Check Example: *4_feature_state_actionreducermap*
 ```js
 on(increment, decrement, (state, action) => {
 
@@ -183,6 +190,8 @@ on(increment, decrement, (state, action) => {
 }),
 ```
 # Selectors
+
+Check Example: *4_feature_state_actionreducermap*
 
 Selectors are projector functions to look into specific data into state. 
 Remember, AppState is root and UserState is feature. We will look into Root and Feature module later. `select` works as map.
@@ -318,6 +327,8 @@ const clothingItems = createSelector(
 ```
 
 # Effects
+
+Check Example: *5_effects*
 
 1. We dispatch an **action** from our code, which triggers a **effect**.
 2. Effects are independent of reducer, however, if reducer, exists then it works after a reducer.
