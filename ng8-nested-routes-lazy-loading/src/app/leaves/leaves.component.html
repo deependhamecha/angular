@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title">Leaves</h5>
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'apply'" routerLinkActive="active"> Apply Leave </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [routerLink]="'balance'" routerLinkActive="active"> Check Leave Balance </a>
+      </li>
+    </ul>
+    <p class="card-text">
+      <router-outlet></router-outlet>
+    </p>
+  </div>
+</div>
