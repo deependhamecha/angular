@@ -18,3 +18,6 @@ Everything related to Angular Framework
 15. ControlValueAccessor
 16. Services and Providers
 17. Create a dynamic component like modal.
+16. Route Resolver
+17. Guards
+18. Angular Component reload on same route

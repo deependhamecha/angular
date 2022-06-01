@@ -504,12 +504,17 @@ export const userReducer = createReducer(
 ```
 
 # Meta Reducers
+Meta Reducers are like interceptors for reducers. They work before every reducer specified with `forRoot`, `forFeature` module.
 
-# Entity
+
+# Entity (Good for nothing)
+Not implemented in `6_entity` but implemented in **ngrx-course** repository.
 
 # Data
 
 # Router Store
+
+Router Store is just a library which stores router state in Store.
 
 # Component Store
 
