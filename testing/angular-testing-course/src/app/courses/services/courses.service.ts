@@ -20,6 +20,7 @@ export class CoursesService {
     }
 
     findAllCourses(): Observable<Course[]> {
+        sessionStorage.setItem('dude', '1');
         return this.http.get('/api/courses')
             .pipe(
                 map(res => res['payload'])

@@ -23,7 +23,6 @@ export class HomeComponent implements OnInit {
     ngOnInit() {
 
       this.reloadCourses();
-
     }
 
 
@@ -34,7 +33,6 @@ export class HomeComponent implements OnInit {
       this.beginnerCourses$ = this.filterByCategory(courses$, 'BEGINNER');
 
       this.advancedCourses$ = this.filterByCategory(courses$, 'ADVANCED');
-
     }
 
     filterByCategory(courses$: Observable<Course[]>, category:string) {
