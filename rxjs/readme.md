@@ -229,6 +229,45 @@ Notes:
 
 ### exhaustMap
 
+It waits until inner observable completes and ignores outer values if inner observable is not completed.
+
+```js
+
+const obs3$ = new Observable((observer) => {
+  setTimeout(() => {
+    observer.next(1);
+  }, 500);
+  setTimeout(() => {
+    observer.next(2);
+  }, 2000);
+});
+
+const obs4$ = new Observable((observer) => {
+  setTimeout(() => {
+    observer.next('a');
+    observer.complete();
+  }, 600);
+  // setTimeout(() => {
+  //   observer.next('b');
+  //   observer.complete();
+  // }, 1200);
+});
+
+obs3$
+  .pipe(
+    tap((e) => console.log(e)),
+    exhaustMap((e) => obs4$.pipe(map((e1) => e1 + '' + e)))
+  )
+  .subscribe((res) => console.log(res));
+
+// Output:
+// 1
+// a1
+// 2
+// a2
+```
+
+
 
 
 ### forkJoin
