@@ -97,7 +97,10 @@ this.advancedCourses$ = this.service.filterByCategory('ADVANCED');
 {{advancedCourses$ | async}}
 ```
 
-7. 
+7.
+```js
+<a *ngIf="(courses$ | async) as courses"></a>
+```
 
 
 
