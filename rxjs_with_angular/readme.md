@@ -98,8 +98,27 @@ this.advancedCourses$ = this.service.filterByCategory('ADVANCED');
 ```
 
 7.
-```js
+```html
 <a *ngIf="(courses$ | async) as courses"></a>
+```
+
+### Make URL Safe
+```html
+
+<iframe width="400" height="600" [src]="imgUrl | safeUrl"></iframe>
+```
+
+```ts
+@Pipe({
+    name: 'safeUrl'
+})
+export class SafeUrlPipe implements PipeTransform {
+    constructor(private sanitizer: DomSanitizer) {}
+
+    transform(url) {
+        return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    }
+}
 ```
 
 
