@@ -118,3 +118,25 @@ describe('Checking title', () => {
 
 });
 ```
+
+# Udemy Course
+Cypress Dashboard
+```
+npx cypress open
+```
+
+Create folder `integration/examples` inside `cypress`. Create a file `Test1.js`. Since, we created custom folder, cypress wont know our folder.
+To tell Cypress specify folder in `specPattern` in `cypress.config.json`.
+```js
+module.exports = defineConfig({
+  e2e: {
+    setupNodeEvents(on, config) {
+      // implement node event listeners here
+    },
+    specPattern: 'cypress/integration/examples/*.js'
+  },
+});
+```
+
+  Cypress accepts **Mocha** and **Jasmine** frameworks pattern of writing tests and it comes with Mocha test pattern. You can also configure Jasmine test pattern.
+
